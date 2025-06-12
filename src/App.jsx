@@ -11,12 +11,22 @@ function App() {
   return (
     <>
       <Header />
-      <HeroSection />
+      <div id="home">
+        <HeroSection />
+      </div>
       <CustomerTestimonials />
-      <ProductCatalog />
-      <BestSellers />
-      <BranchLocations />
-      <ContactMethods />
+      <div id="product-catalog">
+        <ProductCatalog />
+      </div>
+      <div id="product-display">
+        <BestSellers />
+      </div>
+      <div id="branch-locations">
+        <BranchLocations />
+      </div>
+      <div id="contact-methods">
+        <ContactMethods />
+      </div>
       <Footer />
     </>
   );

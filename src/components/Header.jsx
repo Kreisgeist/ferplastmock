@@ -24,6 +24,14 @@ const Header = () => {
     setDrawerOpen(open);
   };
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      const offset = section.getBoundingClientRect().top + window.scrollY - 100; // Ajustar el desplazamiento para visibilidad
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <AppBar
@@ -38,10 +46,9 @@ const Header = () => {
         <Toolbar
           sx={{
             justifyContent: 'space-between',
-            flexWrap: 'wrap', // Permite que los elementos se ajusten en pantallas pequeñas
+            flexWrap: 'wrap',
           }}
         >
-          {/* Logo y nombre de la empresa */}
           <Box
             component={Link}
             to="/"
@@ -64,14 +71,13 @@ const Header = () => {
               variant="h6"
               sx={{
                 color: 'white',
-                fontFamily: 'Poppins, sans-serif', // Aplicar fuente Poppins
-                display: { xs: 'none', sm: 'block' }, // Oculta el texto en pantallas muy pequeñas
+                fontFamily: 'Poppins, sans-serif',
+                display: { xs: 'none', sm: 'block' },
               }}
             >
               Ferplast
             </Typography>
           </Box>
-          {/* Botones de navegación */}
           <Box
             sx={{
               display: { xs: 'none', md: 'flex' },
@@ -80,12 +86,11 @@ const Header = () => {
           >
             <Button
               color="inherit"
-              component={Link}
-              to="/"
+              onClick={() => scrollToSection('home')}
               sx={{
                 color: 'white',
                 fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
+                fontFamily: 'DM Sans, sans-serif',
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -97,12 +102,11 @@ const Header = () => {
             </Button>
             <Button
               color="inherit"
-              component={Link}
-              to="/catalog"
+              onClick={() => scrollToSection('product-display')}
               sx={{
                 color: 'white',
                 fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
+                fontFamily: 'DM Sans, sans-serif',
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -114,12 +118,11 @@ const Header = () => {
             </Button>
             <Button
               color="inherit"
-              component={Link}
-              to="/locations"
+              onClick={() => scrollToSection('branch-locations')}
               sx={{
                 color: 'white',
                 fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
+                fontFamily: 'DM Sans, sans-serif',
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -131,12 +134,11 @@ const Header = () => {
             </Button>
             <Button
               color="inherit"
-              component={Link}
-              to="/contact"
+              onClick={() => scrollToSection('contact-methods')}
               sx={{
                 color: 'white',
                 fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
+                fontFamily: 'DM Sans, sans-serif',
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -147,7 +149,6 @@ const Header = () => {
               Contacto
             </Button>
           </Box>
-          {/* Menú hamburguesa para pantallas pequeñas */}
           <IconButton
             color="inherit"
             sx={{ display: { xs: 'flex', md: 'none' } }}
@@ -168,40 +169,39 @@ const Header = () => {
           >
             <List>
               <ListItem disablePadding>
-                <ListItemButton component={Link} to="/" onClick={toggleDrawer(false)}>
+                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('home'); }}>
                   <ListItemText primary="Inicio" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={Link} to="/catalog" onClick={toggleDrawer(false)}>
+                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('product-display'); }}>
                   <ListItemText primary="Catálogo" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={Link} to="/locations" onClick={toggleDrawer(false)}>
+                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('branch-locations'); }}>
                   <ListItemText primary="Sucursales" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton component={Link} to="/contact" onClick={toggleDrawer(false)}>
+                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('contact-methods'); }}>
                   <ListItemText primary="Contacto" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
             </List>
           </Drawer>
-          {/* Icono de usuario y carrito */}
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              gap: 1, // Reducir el espacio entre los iconos
+              gap: 1,
             }}
           >
             <IconButton
               color="inherit"
               sx={{
                 color: 'white',
-                mt: { xs: 1, md: 0 }, // Añade margen superior en pantallas pequeñas
+                mt: { xs: 1, md: 0 },
               }}
               aria-label="Iniciar sesión"
               onClick={handleOpenLogin}
@@ -212,7 +212,7 @@ const Header = () => {
               color="inherit"
               sx={{
                 color: 'white',
-                mt: { xs: 1, md: 0 }, // Añade margen superior en pantallas pequeñas
+                mt: { xs: 1, md: 0 },
               }}
               aria-label="Carrito de compras"
             >
