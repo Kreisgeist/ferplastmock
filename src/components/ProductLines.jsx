@@ -32,6 +32,7 @@ const productLines = [
 
 const ProductLines = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCard, setSelectedCard] = useState(null); // Track the selected card
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? productLines.length - 1 : prevIndex - 1));
@@ -39,6 +40,10 @@ const ProductLines = () => {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex === productLines.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const handleCardTap = (id) => {
+    setSelectedCard((prevSelected) => (prevSelected === id ? null : id)); // Toggle selection
   };
 
   const visibleProduct = productLines[currentIndex];
@@ -68,11 +73,17 @@ const ProductLines = () => {
       >
         <ArrowBackIosIcon onClick={handlePrevious} sx={{ cursor: 'pointer', marginRight: '10px' }} />
         <Card
+          onClick={() => handleCardTap(visibleProduct.id)} // Handle tap
           sx={{
             maxWidth: 300,
             margin: '0 auto',
-            boxShadow: '0 6px 15px rgba(0, 0, 0, 0.15)',
+            boxShadow: selectedCard === visibleProduct.id
+              ? '0 6px 20px var(--primary-color)' // Highlight selected card
+              : '0 6px 15px rgba(0, 0, 0, 0.15)',
             borderRadius: '15px',
+            transition: 'transform 0.3s, box-shadow 0.3s',
+            transform: selectedCard === visibleProduct.id ? 'scale(1.05)' : 'scale(1)',
+            position: 'relative',
           }}
         >
           <CardMedia
@@ -104,6 +115,27 @@ const ProductLines = () => {
               {visibleProduct.description}
             </Typography>
           </CardContent>
+          {selectedCard === visibleProduct.id && (
+            <Button
+              variant="contained"
+              onClick={(e) => e.stopPropagation()} // Prevent deselection on button click
+              sx={{
+                marginTop: '10px',
+                marginBottom: '20px',
+                backgroundColor: 'var(--primary-color)',
+                color: 'white',
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 'bold',
+                textTransform: 'none',
+                alignSelf: 'center',
+                '&:hover': {
+                  backgroundColor: 'var(--secondary-color)',
+                },
+              }}
+            >
+              Ver Productos
+            </Button>
+          )}
         </Card>
         <ArrowForwardIosIcon onClick={handleNext} sx={{ cursor: 'pointer', marginLeft: '10px' }} />
       </Box>

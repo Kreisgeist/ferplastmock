@@ -18,10 +18,15 @@ const Header = () => {
   };
 
   const toggleDrawer = (open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setDrawerOpen(open);
+  };
+
+  const handleMenuClick = (sectionId) => {
+    setDrawerOpen(false); // Cierra el menú
+    scrollToSection(sectionId); // Navega a la sección
   };
 
   const scrollToSection = (id) => {
@@ -169,23 +174,35 @@ const Header = () => {
           >
             <List>
               <ListItem disablePadding>
-                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('home'); }}>
-                  <ListItemText primary="Inicio" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
+                <ListItemButton onClick={() => handleMenuClick('home')}>
+                  <ListItemText 
+                    primary="Inicio" 
+                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('product-display'); }}>
-                  <ListItemText primary="Catálogo" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
+                <ListItemButton onClick={() => handleMenuClick('product-display')}>
+                  <ListItemText 
+                    primary="Catálogo" 
+                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('branch-locations'); }}>
-                  <ListItemText primary="Sucursales" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
+                <ListItemButton onClick={() => handleMenuClick('branch-locations')}>
+                  <ListItemText 
+                    primary="Sucursales" 
+                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+                  />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
-                <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('contact-methods'); }}>
-                  <ListItemText primary="Contacto" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
+                <ListItemButton onClick={() => handleMenuClick('contact-methods')}>
+                  <ListItemText 
+                    primary="Contacto" 
+                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+                  />
                 </ListItemButton>
               </ListItem>
             </List>
