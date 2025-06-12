@@ -12,6 +12,7 @@ const discountedProducts = [
     ],
     price: '$10.00',
     category: 'discountedproducts',
+    discount: 0.30
   },
   {
     id: 22,
@@ -26,6 +27,7 @@ const discountedProducts = [
     ],
     price: '$15.00',
     category: 'discountedproducts',
+    discount: 0.15
   },
   {
     id: 23,
@@ -40,6 +42,7 @@ const discountedProducts = [
     ],
     price: '$20.00',
     category: 'discountedproducts',
+    discount: 0.10
   },
   {
     id: 24,
@@ -54,6 +57,7 @@ const discountedProducts = [
     ],
     price: '$25.00',
     category: 'discountedproducts',
+    discount: 0.40
   },
   {
     id: 25,
@@ -68,6 +72,7 @@ const discountedProducts = [
     ],
     price: '$30.00',
     category: 'discountedproducts',
+    discount: 0.05
   }
 ];
 

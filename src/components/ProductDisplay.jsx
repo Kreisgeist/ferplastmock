@@ -75,6 +75,12 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const StyledFinalPrice = styled('span')({
+  color: '#ff5055',
+  fontSize: '1.2rem', // Un poco más grande
+  fontWeight: 'bold',
+});
+
 const BestSellers = () => {
 	const [activeTab, setActiveTab] = useState(0);
 
@@ -109,6 +115,16 @@ const BestSellers = () => {
 				},
 			},
 		],
+	};
+
+	const calculateDiscountedPrice = (price, discount) => {
+		const numericPrice = parseFloat(price.replace('$', ''));
+		const discountAmount = numericPrice * discount;
+		const finalPrice = numericPrice - discountAmount;
+		return {
+			discountAmount: `$${discountAmount.toFixed(2)}`,
+			finalPrice: `$${finalPrice.toFixed(2)}`,
+		};
 	};
 
 	const renderCarousel = (products) => (
@@ -151,7 +167,18 @@ const BestSellers = () => {
 									{product.description}
 								</StyledDescription>
 							)}
-							<StyledPrice variant="h6">{product.price}</StyledPrice>
+							{product.category === 'discountedproducts' && product.discount ? (
+								(() => {
+									const { discountAmount, finalPrice } = calculateDiscountedPrice(product.price, product.discount);
+									return (
+										<StyledPrice variant="h6">
+											{product.price} - {discountAmount} (descuento) = <StyledFinalPrice>{finalPrice}</StyledFinalPrice>
+										</StyledPrice>
+									);
+								})()
+							) : (
+								<StyledPrice variant="h6">{product.price}</StyledPrice>
+							)}
 							<StyledButton startIcon={<ShoppingCartIcon />}>Añadir al carrito</StyledButton>
 						</CardContent>
 					</StyledCard>
