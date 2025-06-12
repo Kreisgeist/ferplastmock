@@ -7,21 +7,21 @@ const testimonials = [
   {
     id: 1,
     name: 'Juan Pérez',
-    photo: '/my-demo/assets/customers/customer1.jpg',
+    photo: '/assets/customers/customer1.jpg',
     summary: '"Excelente calidad y servicio"',
     description: 'Ferplast siempre me ha ofrecido productos de excelente calidad y un servicio al cliente inigualable. ¡Recomiendo ampliamente esta empresa! Además, su atención personalizada y rapidez en las entregas me han dejado completamente satisfecho. Es un lugar donde siempre encuentro lo que necesito.'
   },
   {
     id: 2,
     name: 'María López',
-    photo: '/my-demo/assets/customers/customer2.jpg',
+    photo: '/assets/customers/customer2.jpg',
     summary: '"Confianza y profesionalismo"',
     description: 'Desde que descubrí Ferplast, no he vuelto a buscar en otro lugar. Su profesionalismo y atención al detalle son incomparables. Siempre me siento segura comprando aquí, sabiendo que recibiré productos de alta calidad y un servicio excepcional.'
   },
   {
     id: 3,
     name: 'Carlos García',
-    photo: '/my-demo/assets/customers/customer3.jpg',
+    photo: '/assets/customers/customer3.jpg',
     summary: '"Variedad y precios justos"',
     description: 'Me encanta la variedad de productos que ofrecen y los precios son muy competitivos. Ferplast es mi tienda de confianza. Además, su equipo siempre está dispuesto a ayudarme a encontrar exactamente lo que necesito, lo que hace que mi experiencia de compra sea aún mejor.'
   }

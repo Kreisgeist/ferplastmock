@@ -29,9 +29,9 @@ const HeroSection = () => {
   };
 
   const images = [
-    { src: '/my-demo/assets/promo1.jpg', alt: 'Promo 1' },
-    { src: '/my-demo/assets/promo2.jpg', alt: 'Promo 2' },
-    { src: '/my-demo/assets/promo3.jpg', alt: 'Promo 3' },
+    { src: '/assets/promo1.jpg', alt: 'Promo 1' },
+    { src: '/assets/promo2.jpg', alt: 'Promo 2' },
+    { src: '/assets/promo3.jpg', alt: 'Promo 3' },
   ];
 
   return (

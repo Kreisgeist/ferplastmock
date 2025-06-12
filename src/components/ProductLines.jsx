@@ -8,25 +8,25 @@ const productLines = [
     id: 1,
     name: 'Línea de Juguetes',
     description: 'Descubre nuestra línea de juguetes diseñados para estimular la creatividad y diversión de los más pequeños.',
-    image: '/my-demo/assets/productlines/toys.jpg',
+    image: '/assets/productlines/toys.jpg',
   },
   {
     id: 2,
     name: 'Línea de Jardín',
     description: 'Productos ideales para embellecer y mantener tu jardín en perfectas condiciones.',
-    image: '/my-demo/assets/productlines/gardening.jpg',
+    image: '/assets/productlines/gardening.jpg',
   },
   {
     id: 3,
     name: 'Línea de Limpieza',
     description: 'Soluciones de limpieza eficientes para mantener tus espacios impecables.',
-    image: '/my-demo/assets/productlines/clean.jpg',
+    image: '/assets/productlines/clean.jpg',
   },
   {
     id: 4,
     name: 'Línea de Industria Agrícola',
     description: 'Equipos y herramientas para apoyar las actividades agrícolas con la mejor calidad.',
-    image: '/my-demo/assets/productlines/industrial.jpg',
+    image: '/assets/productlines/industrial.jpg',
   },
 ];
 

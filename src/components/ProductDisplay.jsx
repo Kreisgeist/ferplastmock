@@ -159,7 +159,7 @@ const BestSellers = () => {
 				<div key={product.id} className={`carousel-item ${transitioning ? 'fade-out' : 'fade-in'}`}>
 					<StyledCard>
 						<StyledCardMedia
-							src={`../my-demo/assets/productdisplay/${product.category}/${product.id}.jpg`}
+							src={`../assets/productdisplay/${product.category}/${product.id}.jpg`}
 							alt={product.name}
 						/>
 						<CardContent>
