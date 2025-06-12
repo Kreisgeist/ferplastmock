@@ -43,7 +43,7 @@ const BranchLocations = () => {
         padding: '20px',
         background:
           'linear-gradient(to bottom, var(--background-color), rgba(77, 61, 138, 0.1))',
-        textAlign: 'center', // Centrar contenido
+        textAlign: 'center',
       }}
     >
       <Typography
@@ -59,10 +59,22 @@ const BranchLocations = () => {
       >
         Nuestras Sucursales
       </Typography>
-      <Grid container spacing={3} justifyContent="center">
+      <Grid container spacing={3} justifyContent="center" alignItems="stretch">
         {branchLocations.map((branch, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card sx={{ height: '100%' }}>
+          <Grid item xs={12} sm={6} md={3} key={index} style={{ display: 'flex' }}>
+            <Card
+              sx={{
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                textAlign: 'left', // Ensure text alignment is consistent
+                minHeight: '300px', // Set a minimum height for uniformity
+                maxWidth: '280px', // Set a maximum width to prevent oversized cards
+                margin: '0 auto', // Center the cards horizontally
+              }}
+            >
               <CardContent>
                 <Typography
                   variant="h5"
@@ -71,6 +83,7 @@ const BranchLocations = () => {
                     fontWeight: 'bold',
                     color: 'var(--primary-color)',
                     marginBottom: '10px',
+                    wordWrap: 'break-word', // Ensure text wraps properly
                   }}
                 >
                   {branch.name}
@@ -81,6 +94,7 @@ const BranchLocations = () => {
                     fontFamily: 'DM Sans, sans-serif',
                     color: 'var(--text-color)',
                     marginBottom: '10px',
+                    wordWrap: 'break-word', // Ensure text wraps properly
                   }}
                 >
                   {branch.address}
@@ -98,10 +112,10 @@ const BranchLocations = () => {
                 </Typography>
                 <ul
                   style={{
-                    paddingLeft: '0', // Eliminar sangría
+                    paddingLeft: '0',
                     marginBottom: '10px',
-                    textAlign: 'center', // Centrar texto
-                    listStylePosition: 'inside', // Asegurar que los bullets estén dentro del contenedor
+                    textAlign: 'center',
+                    listStylePosition: 'inside',
                   }}
                 >
                   {branch.phones.map((phone, idx) => (
