@@ -42,20 +42,24 @@ const StyledPrice = styled(Typography)(({ theme }) => ({
 	fontSize: '1rem', // Reducir tamaño del texto
 }));
 
-const StyledTabs = styled(Tabs)({
-	'& .MuiTab-root': {
-		fontFamily: 'Poppins, sans-serif',
-		fontWeight: 'bold',
-		color: 'var(--text-color)',
-		textTransform: 'none',
-	},
-	'& .MuiTab-root.Mui-selected': {
-		color: 'var(--primary-color)',
-	},
-	'& .MuiTabs-indicator': {
-		backgroundColor: 'var(--primary-color)',
-	},
-});
+const StyledTabs = styled(Tabs)(({ theme }) => ({
+  flexWrap: 'wrap', // Allow tabs to wrap into multiple rows
+  '& .MuiTab-root': {
+    fontFamily: 'Poppins, sans-serif',
+    fontWeight: 'bold',
+    color: 'var(--text-color)',
+    textTransform: 'none',
+    minWidth: 'auto',
+    padding: '6px 12px',
+    flex: '1 1 auto', // Allow tabs to adjust their size
+  },
+  '& .MuiTab-root.Mui-selected': {
+    color: 'var(--primary-color)',
+  },
+  '& .MuiTabs-indicator': {
+    backgroundColor: 'var(--primary-color)',
+  },
+}));
 
 const StyledButton = styled(Button)(({ theme }) => ({
   position: 'absolute',
@@ -189,7 +193,12 @@ const BestSellers = () => {
 
 	return (
 		<Box sx={{ textAlign: 'center', padding: '60px 30px' }}>
-			<StyledTabs value={activeTab} onChange={handleTabChange} centered>
+			<StyledTabs
+				value={activeTab}
+				onChange={handleTabChange}
+				centered
+				variant="standard" // Standard layout for wrapping
+			>
 				<Tab label="Los más vendidos" />
 				<Tab label="Productos Nuevos" />
 				<Tab label="Productos con Descuento" />

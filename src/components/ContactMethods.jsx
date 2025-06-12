@@ -42,7 +42,7 @@ const ContactMethods = () => {
               color: 'var(--text-color)',
             }}
           >
-            info@mexicanplastics.com
+            contacto@ferplast.com.mx
           </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
