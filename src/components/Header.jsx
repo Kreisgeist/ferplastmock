@@ -63,6 +63,7 @@ const Header = () => {
               variant="h6"
               sx={{
                 color: 'white',
+                fontFamily: 'Poppins, sans-serif', // Aplicar fuente Poppins
                 display: { xs: 'none', sm: 'block' }, // Oculta el texto en pantallas muy pequeñas
               }}
             >
@@ -83,6 +84,7 @@ const Header = () => {
               sx={{
                 color: 'white',
                 fontWeight: 500,
+                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -99,6 +101,7 @@ const Header = () => {
               sx={{
                 color: 'white',
                 fontWeight: 500,
+                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -115,6 +118,7 @@ const Header = () => {
               sx={{
                 color: 'white',
                 fontWeight: 500,
+                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -131,6 +135,7 @@ const Header = () => {
               sx={{
                 color: 'white',
                 fontWeight: 500,
+                fontFamily: 'DM Sans, sans-serif', // Aplicar fuente DM Sans
                 transition: 'background 0.2s, color 0.2s',
                 '&:hover': {
                   backgroundColor: '#2a1e5c',
@@ -163,22 +168,22 @@ const Header = () => {
             <List>
               <ListItem disablePadding>
                 <ListItemButton component={Link} to="/" onClick={toggleDrawer(false)}>
-                  <ListItemText primary="Inicio" />
+                  <ListItemText primary="Inicio" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
                 <ListItemButton component={Link} to="/catalog" onClick={toggleDrawer(false)}>
-                  <ListItemText primary="Catálogo" />
+                  <ListItemText primary="Catálogo" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
                 <ListItemButton component={Link} to="/locations" onClick={toggleDrawer(false)}>
-                  <ListItemText primary="Sucursales" />
+                  <ListItemText primary="Sucursales" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
               <ListItem disablePadding>
                 <ListItemButton component={Link} to="/contact" onClick={toggleDrawer(false)}>
-                  <ListItemText primary="Contacto" />
+                  <ListItemText primary="Contacto" sx={{ fontFamily: 'DM Sans, sans-serif' }} />
                 </ListItemButton>
               </ListItem>
             </List>

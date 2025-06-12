@@ -1,28 +1,59 @@
-import { Button, Typography, Container } from '@mui/material';
-import logo from '../assets/logo.png';
+import { Box, Container, Typography } from '@mui/material';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const HeroSection = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    appendDots: (dots) => (
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10px',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <ul style={{ margin: 0, padding: 0 }}>{dots}</ul>
+      </div>
+    ),
+    dotsClass: 'slick-dots slick-thumb',
+  };
+
+  const images = [
+    { src: '/my-demo/assets/promo1.jpg', alt: 'Promo 1' },
+    { src: '/my-demo/assets/promo2.jpg', alt: 'Promo 2' },
+    { src: '/my-demo/assets/promo3.jpg', alt: 'Promo 3' },
+  ];
+
   return (
-    <Container 
-      style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        height: '100vh', 
-        textAlign: 'center' 
+    <Container
+      style={{
+        width: '100%',
+        padding: 0,
+        overflow: 'hidden',
+        position: 'relative',
       }}
     >
-      <img src={logo} alt="Company Logo" style={{ width: '150px', marginBottom: '20px' }} />
-      <Typography variant="h2" component="h1" gutterBottom>
-        ¡Bienvenido a Ferplast!
-      </Typography>
-      <Typography variant="h5" component="p" gutterBottom>
-        Your trusted partner in high-quality plastic solutions.
-      </Typography>
-      <Button variant="contained" color="primary" href="#product-catalog">
-        Explore Our Products
-      </Button>
+      <Slider {...settings}>
+        {images.map((image, index) => (
+          <div key={index}>
+            <img
+              src={image.src}
+              alt={image.alt}
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        ))}
+      </Slider>
     </Container>
   );
 };
