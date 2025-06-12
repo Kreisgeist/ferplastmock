@@ -2,6 +2,7 @@ import { AppBar, Toolbar, Typography, Button, Box, IconButton, Drawer, List, Lis
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import logo from '../assets/logo.png';
 import React, { useState } from 'react';
 import FloatingLogin from './FloatingLogin';
@@ -188,19 +189,36 @@ const Header = () => {
               </ListItem>
             </List>
           </Drawer>
-          {/* Icono de usuario */}
-          <IconButton
-            color="inherit"
+          {/* Icono de usuario y carrito */}
+          <Box
             sx={{
-              color: 'white',
-              ml: { xs: 0, md: 2 }, // Ajusta el margen en pantallas pequeñas
-              mt: { xs: 1, md: 0 }, // Añade margen superior en pantallas pequeñas
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1, // Reducir el espacio entre los iconos
             }}
-            aria-label="Iniciar sesión"
-            onClick={handleOpenLogin}
           >
-            <AccountCircleIcon />
-          </IconButton>
+            <IconButton
+              color="inherit"
+              sx={{
+                color: 'white',
+                mt: { xs: 1, md: 0 }, // Añade margen superior en pantallas pequeñas
+              }}
+              aria-label="Iniciar sesión"
+              onClick={handleOpenLogin}
+            >
+              <AccountCircleIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              sx={{
+                color: 'white',
+                mt: { xs: 1, md: 0 }, // Añade margen superior en pantallas pequeñas
+              }}
+              aria-label="Carrito de compras"
+            >
+              <ShoppingCartIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       <FloatingLogin open={loginOpen} onClose={handleCloseLogin} onRegister={handleRegister} />
