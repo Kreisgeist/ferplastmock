@@ -1,5 +1,7 @@
-import { Grid, Card, CardContent, Typography, Button } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import React, { useState } from 'react';
+import { Box, Typography, Card, CardContent, CardMedia, Grid, Button } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const productLines = [
   {
@@ -29,8 +31,20 @@ const productLines = [
 ];
 
 const ProductLines = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? productLines.length - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === productLines.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const visibleProduct = productLines[currentIndex];
+
   return (
-    <div style={{ padding: '40px 20px' }}>
+    <Box sx={{ textAlign: 'center', padding: '40px 20px' }}>
       <Typography
         variant="h4"
         gutterBottom
@@ -38,30 +52,91 @@ const ProductLines = () => {
           fontFamily: 'Poppins, sans-serif',
           fontWeight: 'bold',
           color: 'var(--heading-color)',
-          textAlign: 'center',
           marginBottom: '30px',
         }}
       >
         Nuestras Líneas de Productos
       </Typography>
-      <Grid container spacing={2} direction="row" justifyContent="center" alignItems="stretch" wrap="nowrap" sx={{ overflowX: 'auto' }}>
-        {productLines.map((line) => (
-          <Grid item xs={12} sm={6} md={3} key={line.id} sx={{ flex: '0 0 auto', display: 'flex' }}>
-            <Card
+      {/* Horizontal navigation for small screens */}
+      <Box
+        sx={{
+          display: { xs: 'flex', md: 'none' }, // Show only on small screens
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+        }}
+      >
+        <ArrowBackIosIcon onClick={handlePrevious} sx={{ cursor: 'pointer', marginRight: '10px' }} />
+        <Card
+          sx={{
+            maxWidth: 300,
+            margin: '0 auto',
+            boxShadow: '0 6px 15px rgba(0, 0, 0, 0.15)',
+            borderRadius: '15px',
+          }}
+        >
+          <CardMedia
+            component="img"
+            height="200"
+            image={visibleProduct.image}
+            alt={visibleProduct.name}
+          />
+          <CardContent>
+            <Typography
+              variant="h5"
               sx={{
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-                borderRadius: '15px',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                width: '250px',
-                height: '100%',
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 'bold',
+                color: 'var(--primary-color)',
+                marginBottom: '10px',
               }}
             >
-              <img
-                src={line.image}
+              {visibleProduct.name}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                fontFamily: 'DM Sans, sans-serif',
+                color: 'var(--text-color)',
+                lineHeight: 1.6,
+              }}
+            >
+              {visibleProduct.description}
+            </Typography>
+          </CardContent>
+        </Card>
+        <ArrowForwardIosIcon onClick={handleNext} sx={{ cursor: 'pointer', marginLeft: '10px' }} />
+      </Box>
+      {/* Original layout for larger screens */}
+      <Grid
+        container
+        spacing={3}
+        justifyContent="center"
+        alignItems="stretch"
+        sx={{ display: { xs: 'none', md: 'flex' } }} // Show only on larger screens
+      >
+        {productLines.map((line) => (
+          <Grid item xs={12} sm={6} md={3} key={line.id} sx={{ display: 'flex' }}>
+            <Card
+              sx={{
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                textAlign: 'left',
+                minHeight: '300px',
+                maxWidth: '280px',
+                margin: '0 auto',
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                borderRadius: '15px',
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="150"
+                image={line.image}
                 alt={line.name}
-                style={{ width: '100%', height: '150px', objectFit: 'cover' }}
               />
               <CardContent
                 sx={{
@@ -97,7 +172,6 @@ const ProductLines = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  endIcon={<ArrowForwardIcon />}
                   sx={{
                     backgroundColor: 'var(--primary-color)',
                     color: 'white',
@@ -116,7 +190,7 @@ const ProductLines = () => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Box>
   );
 };
 

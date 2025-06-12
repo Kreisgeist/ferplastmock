@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Typography, Avatar, Grid, Paper } from '@mui/material';
+import { Box, Typography, Avatar, Grid, Paper, IconButton } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const testimonials = [
   {
@@ -26,7 +28,17 @@ const testimonials = [
 ];
 
 const CustomerTestimonials = () => {
-  const [selectedTestimonial, setSelectedTestimonial] = useState(testimonials[0]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handlePrevious = () => {
+    setSelectedIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setSelectedIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const selectedTestimonial = testimonials[selectedIndex];
 
   return (
     <Box sx={{ textAlign: 'center', padding: '60px 30px' }}>
@@ -37,18 +49,43 @@ const CustomerTestimonials = () => {
           fontFamily: 'Poppins, sans-serif',
           fontWeight: 'bold',
           color: 'var(--heading-color)',
-          marginBottom: '40px', // Más espacio vertical entre el título y las fotos
+          marginBottom: '40px',
         }}
       >
         Nuestros clientes
       </Typography>
+      <Box
+        sx={{
+          display: { xs: 'flex', md: 'none' }, // Show column design on small screens
+          flexDirection: 'row', // Align arrows and photo in a row
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '30px',
+        }}
+      >
+        <IconButton onClick={handlePrevious} sx={{ marginRight: '10px' }}>
+          <ArrowBackIosIcon />
+        </IconButton>
+        <Avatar
+          src={selectedTestimonial.photo}
+          alt={selectedTestimonial.name}
+          sx={{
+            width: 150,
+            height: 150,
+            border: '4px solid #EB9F32',
+          }}
+        />
+        <IconButton onClick={handleNext} sx={{ marginLeft: '10px' }}>
+          <ArrowForwardIosIcon />
+        </IconButton>
+      </Box>
       <Grid
         container
-        spacing={6} // Más espacio horizontal entre las fotos
+        spacing={6}
         justifyContent="center"
-        sx={{ marginBottom: '50px' }} // Más espacio vertical entre las fotos y el cuadro de texto
+        sx={{ display: { xs: 'none', md: 'flex' }, marginBottom: '50px' }} // Hide grid on small screens
       >
-        {testimonials.map((testimonial) => (
+        {testimonials.map((testimonial, index) => (
           <Grid item key={testimonial.id}>
             <Avatar
               src={testimonial.photo}
@@ -57,10 +94,10 @@ const CustomerTestimonials = () => {
                 width: 150,
                 height: 150,
                 cursor: 'pointer',
-                border: selectedTestimonial.id === testimonial.id ? '4px solid #EB9F32' : '4px solid transparent',
+                border: selectedIndex === index ? '4px solid #EB9F32' : '4px solid transparent',
                 transition: 'border 0.3s',
               }}
-              onClick={() => setSelectedTestimonial(testimonial)}
+              onClick={() => setSelectedIndex(index)}
             />
           </Grid>
         ))}
