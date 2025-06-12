@@ -143,6 +143,16 @@ const ContactMethods = () => {
             backgroundColor: '#fff',
             borderRadius: '5px',
             marginBottom: '10px',
+            boxShadow: '0 0 10px var(--primary-color)', // Add a glowing effect
+            '& .MuiOutlinedInput-root': {
+              '&:hover fieldset': {
+                borderColor: 'var(--primary-color)', // Highlight border on hover
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'var(--primary-color)', // Highlight border when focused
+                boxShadow: '0 0 15px var(--primary-color)', // Add stronger glow when focused
+              },
+            },
           }}
         />
         <Typography

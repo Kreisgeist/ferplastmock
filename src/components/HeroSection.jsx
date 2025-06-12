@@ -49,7 +49,20 @@ const HeroSection = () => {
             <img
               src={image.src}
               alt={image.alt}
-              style={{ width: '100%', height: 'auto' }}
+              style={{
+                width: '100%',
+                height: 'auto',
+                transition: 'transform 0.3s ease, opacity 0.3s ease', // Smooth transition for hover effect
+                cursor: 'pointer', // Pointer cursor to indicate clickability
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)'; // Slight zoom on hover
+                e.currentTarget.style.opacity = '0.9'; // Slight opacity change
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)'; // Reset zoom
+                e.currentTarget.style.opacity = '1'; // Reset opacity
+              }}
             />
           </div>
         ))}

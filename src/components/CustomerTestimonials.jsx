@@ -95,7 +95,10 @@ const CustomerTestimonials = () => {
                 height: 150,
                 cursor: 'pointer',
                 border: selectedIndex === index ? '4px solid #EB9F32' : '4px solid transparent',
-                transition: 'border 0.3s',
+                transition: 'transform 0.3s, border 0.3s', // Smooth transition for hover effect
+                '&:hover': {
+                  transform: 'scale(1.1)', // Slightly enlarge the photo on hover
+                },
               }}
               onClick={() => setSelectedIndex(index)}
             />
@@ -131,6 +134,7 @@ const CustomerTestimonials = () => {
             fontFamily: 'Poppins, sans-serif',
             fontWeight: 'bold',
             color: 'var(--primary-color)',
+            fontStyle: 'italic', // Make the text italic
           }}
         >
           {selectedTestimonial.summary}

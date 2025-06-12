@@ -73,6 +73,13 @@ const BranchLocations = () => {
                 minHeight: '300px', // Set a minimum height for uniformity
                 maxWidth: '280px', // Set a maximum width to prevent oversized cards
                 margin: '0 auto', // Center the cards horizontally
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                borderRadius: '15px',
+                transition: 'transform 0.3s, box-shadow 0.3s', // Smooth transition for hover effect
+                '&:hover': {
+                  transform: 'scale(1.05)', // Slightly enlarge the card on hover
+                  boxShadow: '0 6px 20px var(--primary-color)', // Add a glow effect with the primary color
+                },
               }}
             >
               <CardContent>
