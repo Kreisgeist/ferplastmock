@@ -10,6 +10,7 @@ import FloatingLogin from './FloatingLogin';
 const Header = () => {
   const [loginOpen, setLoginOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [menuIconRotated, setMenuIconRotated] = useState(false); // State for animation
 
   const handleOpenLogin = () => setLoginOpen(true);
   const handleCloseLogin = () => setLoginOpen(false);
@@ -21,12 +22,8 @@ const Header = () => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    setDrawerOpen(open);
-  };
-
-  const handleMenuClick = (sectionId) => {
-    setDrawerOpen(false); // Cierra el menú
-    scrollToSection(sectionId); // Navega a la sección
+    setMenuIconRotated(open); // Trigger animation
+    setTimeout(() => setDrawerOpen(open), 150); // Delay drawer appearance to sync with animation
   };
 
   const scrollToSection = (id) => {
@@ -54,6 +51,18 @@ const Header = () => {
             flexWrap: 'wrap',
           }}
         >
+          <IconButton
+            color="inherit"
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              color: 'white', // Match the color of other icons
+              transition: 'transform 0.15s ease', // Faster rotation animation
+              transform: menuIconRotated ? 'rotate(90deg)' : 'rotate(0deg)', // Rotate on click
+            }}
+            onClick={toggleDrawer(true)}
+          >
+            <MenuIcon />
+          </IconButton>
           <Box
             component={Link}
             to="/"
@@ -65,6 +74,8 @@ const Header = () => {
               borderRadius: '5px',
               position: 'relative',
               overflow: 'hidden',
+              justifyContent: 'center', // Center the logo
+              flexGrow: { xs: 1, md: 0 }, // Allow centering on small screens
               '&:hover': {
                 backgroundColor: '#2a1e5c',
                 color: '#FFD700',
@@ -77,136 +88,12 @@ const Header = () => {
               sx={{
                 color: 'white',
                 fontFamily: 'Poppins, sans-serif',
-                display: { xs: 'none', sm: 'block' },
+                display: { xs: 'none', sm: 'block' }, // Hide name on small screens
               }}
             >
               Ferplast
             </Typography>
           </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              gap: 2,
-            }}
-          >
-            <Button
-              color="inherit"
-              onClick={() => scrollToSection('home')}
-              sx={{
-                color: 'white',
-                fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif',
-                transition: 'background 0.2s, color 0.2s',
-                '&:hover': {
-                  backgroundColor: '#2a1e5c',
-                  color: '#FFD700',
-                },
-              }}
-            >
-              Inicio
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => scrollToSection('product-display')}
-              sx={{
-                color: 'white',
-                fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif',
-                transition: 'background 0.2s, color 0.2s',
-                '&:hover': {
-                  backgroundColor: '#2a1e5c',
-                  color: '#FFD700',
-                },
-              }}
-            >
-              Catálogo
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => scrollToSection('branch-locations')}
-              sx={{
-                color: 'white',
-                fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif',
-                transition: 'background 0.2s, color 0.2s',
-                '&:hover': {
-                  backgroundColor: '#2a1e5c',
-                  color: '#FFD700',
-                },
-              }}
-            >
-              Sucursales
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => scrollToSection('contact-methods')}
-              sx={{
-                color: 'white',
-                fontWeight: 500,
-                fontFamily: 'DM Sans, sans-serif',
-                transition: 'background 0.2s, color 0.2s',
-                '&:hover': {
-                  backgroundColor: '#2a1e5c',
-                  color: '#FFD700',
-                },
-              }}
-            >
-              Contacto
-            </Button>
-          </Box>
-          <IconButton
-            color="inherit"
-            sx={{ display: { xs: 'flex', md: 'none' } }}
-            onClick={toggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Drawer
-            anchor="top"
-            open={drawerOpen}
-            onClose={toggleDrawer(false)}
-            sx={{
-              '& .MuiDrawer-paper': {
-                backgroundColor: 'var(--primary-color)',
-                color: 'white',
-              },
-            }}
-          >
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton onClick={() => handleMenuClick('home')}>
-                  <ListItemText 
-                    primary="Inicio" 
-                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton onClick={() => handleMenuClick('product-display')}>
-                  <ListItemText 
-                    primary="Catálogo" 
-                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton onClick={() => handleMenuClick('branch-locations')}>
-                  <ListItemText 
-                    primary="Sucursales" 
-                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
-                  />
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton onClick={() => handleMenuClick('contact-methods')}>
-                  <ListItemText 
-                    primary="Contacto" 
-                    sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
-                  />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Drawer>
           <Box
             sx={{
               display: 'flex',
@@ -238,6 +125,54 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer(false)}
+        sx={{
+          '& .MuiDrawer-paper': {
+            backgroundColor: 'var(--primary-color)',
+            color: 'white',
+            width: '250px', // Set the width of the menu
+            height: '100%', // Full height of the screen
+          },
+        }}
+      >
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('home'); }}>
+              <ListItemText 
+                primary="Inicio" 
+                sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('product-display'); }}>
+              <ListItemText 
+                primary="Catálogo" 
+                sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('branch-locations'); }}>
+              <ListItemText 
+                primary="Sucursales" 
+                sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => { toggleDrawer(false)(); scrollToSection('contact-methods'); }}>
+              <ListItemText 
+                primary="Contacto" 
+                sx={{ fontFamily: 'DM Sans, sans-serif', fontSize: '1rem', fontWeight: 500 }} 
+              />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Drawer>
       <FloatingLogin open={loginOpen} onClose={handleCloseLogin} onRegister={handleRegister} />
     </>
   );
