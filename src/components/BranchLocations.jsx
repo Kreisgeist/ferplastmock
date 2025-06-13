@@ -1,4 +1,5 @@
 import { Card, CardContent, Typography, Grid } from '@mui/material';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const branchLocations = [
   {
@@ -13,6 +14,7 @@ const branchLocations = [
       '(595) 921 1796',
     ],
     fax: '(595) 921 1209',
+    coordinates: { lat: 19.5119, lng: -98.8826 },
   },
   {
     name: 'Sucursal Monterrey',
@@ -20,6 +22,7 @@ const branchLocations = [
       'Av. Lic. Adolfo López Mateos # Num.6259 Colonia Lagrange, San Nicolas de los Garza, N.L. C.P. 66490',
     phones: ['(81) 8191 1393'],
     fax: '(81) 8191 1393',
+    coordinates: { lat: 25.6866, lng: -100.3161 },
   },
   {
     name: 'Sucursal Guadalajara',
@@ -27,16 +30,25 @@ const branchLocations = [
       'Prisciliano Sánchez No. 257 Cruza con Contreras Medellin y Niños Heroes Col. Centro Tlaquepaque Jalisco C.P. 45500',
     phones: ['(33) 3838 4544'],
     fax: '(33) 3639 9611',
+    coordinates: { lat: 20.6597, lng: -103.3496 },
   },
   {
     name: 'Sucursal Merida',
     address:
       'Av. 86 A Num. 535 A Colonia Centro Merida, Yucatan C.P. 97000',
     phones: ['01 (999) 176-7789'],
+    coordinates: { lat: 20.9674, lng: -89.5926 },
   },
 ];
 
 const BranchLocations = () => {
+  const mapContainerStyle = {
+    width: '100%',
+    height: '200px', // Set height for the map
+    borderRadius: '15px', // Match card border radius
+    marginTop: '10px',
+  };
+
   return (
     <div
       style={{
@@ -150,6 +162,15 @@ const BranchLocations = () => {
                     Fax: {branch.fax}
                   </Typography>
                 )}
+                <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+                  <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    center={branch.coordinates}
+                    zoom={15}
+                  >
+                    <Marker position={branch.coordinates} />
+                  </GoogleMap>
+                </LoadScript>
               </CardContent>
             </Card>
           </Grid>
